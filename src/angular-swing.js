@@ -5,11 +5,17 @@ angular
     .directive('swingStack', function () {
         return {
             restrict: 'A',
-            scope: {},
-            controller: function () {
+            scope: {
+                minThrowoutDistance: '@',
+                maxThrowoutDistance: '@'
+            },
+            controller: function ($scope) {
                 var stack;
-
-                stack = Swing.Stack();
+                
+                stack = Swing.Stack({
+                    minThrowOutDistance: Number($scope.minThrowoutDistance),
+                    maxThrowOutDistance: Number($scope.maxThrowoutDistance)
+                });
 
                 this.add = function (cardElement) {
                     return stack.createCard(cardElement);
